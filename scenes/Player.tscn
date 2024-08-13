@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dytub423b1bf3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_52283"]
+size = Vector2(20, 120)
+
+[node name="Player" type="StaticBody2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 60)
+shape = SubResource("RectangleShape2D_52283")
