@@ -19,4 +19,3 @@ func _process(delta):
 	# Limitando a posição para dentro da tela
 	# p_height / 2 porque a posição é referente ao centro do objeto.
 	position.y = clamp(position.y, p_height / 2, win_height - p_height / 2)
-	print(position.y)

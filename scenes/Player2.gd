@@ -1,8 +1,5 @@
 extends StaticBody2D
 
-var ball_pos : Vector2
-var dist : int
-var move_by : int
 var win_height : int
 var p_height : int
 
@@ -14,15 +11,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	# Mover em direção à bola
-	ball_pos = $'../Ball'.position
-	dist = position.y - ball_pos.y
-		
-	if abs(dist) > get_parent().PADDLE_SPEED * delta:
-		move_by = get_parent().PADDLE_SPEED * delta * (dist/abs(dist))
-	else:
-		move_by = dist
-		
-	position.y -= move_by
-	
+	if Input.is_action_pressed('w'):
+		position.y -= get_parent().PADDLE_SPEED * delta
+	if Input.is_action_pressed('s'):
+		position.y += get_parent().PADDLE_SPEED * delta
+
+	# Limitando a posição para dentro da tela
+	# p_height / 2 porque a posição é referente ao centro do objeto.
 	position.y = clamp(position.y, p_height / 2, win_height - p_height / 2)
