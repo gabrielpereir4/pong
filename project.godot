@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Gameconfig="*res://scripts/config/gameconfig.gd"
+
 [dotnet]
 
 project/assembly_name="Pong"

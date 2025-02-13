@@ -1,0 +1,180 @@
+[gd_scene load_steps=10 format=3 uid="uid://b4vlac02r1lyo"]
+
+[ext_resource type="Script" path="res://scripts/Game.gd" id="1_niuca"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="2_u7y4j"]
+[ext_resource type="Script" path="res://scripts/Paddle.gd" id="3_dtvw8"]
+[ext_resource type="Script" path="res://scripts/Ball.gd" id="4_6q6bm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83qmu"]
+size = Vector2(20, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62aks"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5st2"]
+size = Vector2(1152, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11fae"]
+size = Vector2(1152, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_446y0"]
+size = Vector2(64, 648)
+
+[node name="Game" type="ColorRect"]
+texture_filter = 1
+texture_repeat = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.0901961, 0.207843, 1)
+script = ExtResource("1_niuca")
+metadata/_edit_lock_ = true
+
+[node name="Player" type="StaticBody2D" parent="."]
+position = Vector2(50, 324)
+script = ExtResource("2_u7y4j")
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -61.0
+offset_right = 20.0
+offset_bottom = 59.0
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(10, -1)
+shape = SubResource("RectangleShape2D_83qmu")
+metadata/_edit_lock_ = true
+
+[node name="PaddleRight" type="StaticBody2D" parent="."]
+position = Vector2(1082, 324)
+script = ExtResource("3_dtvw8")
+
+[node name="ColorRect" type="ColorRect" parent="PaddleRight"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -61.0
+offset_right = 20.0
+offset_bottom = 59.0
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PaddleRight"]
+position = Vector2(10, -1)
+shape = SubResource("RectangleShape2D_83qmu")
+metadata/_edit_lock_ = true
+
+[node name="Ball" type="CharacterBody2D" parent="."]
+position = Vector2(576, 324)
+collision_mask = 3
+script = ExtResource("4_6q6bm")
+
+[node name="ColorRect" type="ColorRect" parent="Ball"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("RectangleShape2D_62aks")
+metadata/_edit_lock_ = true
+
+[node name="Borders" type="StaticBody2D" parent="."]
+collision_layer = 2
+
+[node name="Top" type="CollisionShape2D" parent="Borders"]
+position = Vector2(576, -32)
+shape = SubResource("RectangleShape2D_o5st2")
+metadata/_edit_lock_ = true
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2(576, 676)
+shape = SubResource("RectangleShape2D_11fae")
+metadata/_edit_lock_ = true
+
+[node name="ScoreLeft" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreLeft"]
+position = Vector2(-32, 324)
+shape = SubResource("RectangleShape2D_446y0")
+metadata/_edit_lock_ = true
+
+[node name="ScoreRight" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreRight"]
+position = Vector2(1184, 324)
+shape = SubResource("RectangleShape2D_446y0")
+metadata/_edit_lock_ = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerScore" type="Label" parent="HUD"]
+offset_left = 456.0
+offset_top = 5.0
+offset_right = 496.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="TimerLabel" type="Label" parent="HUD"]
+offset_left = 512.0
+offset_right = 640.0
+offset_bottom = 69.0
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="ResultLabel" type="Label" parent="HUD"]
+visible = false
+offset_left = 512.0
+offset_top = 192.0
+offset_right = 640.0
+offset_bottom = 432.0
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="CPUScore" type="Label" parent="HUD"]
+offset_left = 648.0
+offset_top = 5.0
+offset_right = 688.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 50
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="BallTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 90.0
+one_shot = true
+
+[connection signal="body_entered" from="ScoreLeft" to="." method="_on_score_left_body_entered"]
+[connection signal="body_entered" from="ScoreRight" to="." method="_on_score_right_body_entered"]
+[connection signal="timeout" from="BallTimer" to="." method="_on_ball_timer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
