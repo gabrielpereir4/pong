@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Gameconfig="*res://scripts/config/gameconfig.gd"
 
+[display]
+
+window/size/resizable=false
+
 [dotnet]
 
 project/assembly_name="Pong"

@@ -1,6 +1,6 @@
 extends Node
 
-const VERSION : String = '1.1.0'
+const VERSION : String = '1.1.1'
 
 var is_multiplayer = false  
 var match_time = 60  
